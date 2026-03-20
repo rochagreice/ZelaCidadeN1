@@ -27,11 +27,8 @@ app.listen(PORT, () => {
 });
 
 //Rota de Listagem - Para buscar todos os problemas registrados
-
 app.get("/incidentes", async (req, res) => {
   const db = await criarBanco(); // Chamamos a função do outro arquivo. O await é o "aguarde", pois o banco precisa de tempo para abrir.
-
   const listaIncidentes = await db.all(`SELECT * FROM incidentes`);
-
-  res.json(listaIncidentes); // Entrega esses dados para o cliente em formato JSON
+  res.json(listaIncidentes); //Entrega esses dados para o cliente em formato JSON
 });

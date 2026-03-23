@@ -20,7 +20,7 @@ const criarBanco = async () => {
         nome_solicitante TEXT,             --Quem está avisando
         data_registro TEXT,                --Data em formato (ex: 16/03 16.03)
         hora_registro TEXT,                --Hora que foi registrado
-        status_resolucao TEX DEFAULT 'Pendente'  --O banco define automaticamente 'Pendente'
+        status_resolucao TEXT DEFAULT 'Pendente'  --O banco define automaticamente 'Pendente'
     )
     `);
 

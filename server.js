@@ -40,7 +40,7 @@ app.get("/incidentes", async (req, res) => {
   res.json(listaIncidentes); //Entrega esses dados para o cliente em formato JSON
 });
 
-// Rota Específica
+//Rota Específica
 app.get("/incidentes/:id", async (req, res) => {
   const { id } = req.params;
 
@@ -49,13 +49,14 @@ app.get("/incidentes/:id", async (req, res) => {
   const incidenteEspecifico = await db.all(
     `SELECT * FROM incidentes WHERE id = ?`,
     [id],
-  ); // ? é um espaço reservado que será preenchido pelo valor da variável [id]
-  ///? SQL Injection é usado para segurança.
+  );
+  // ? é um espaço reservado que será preenchido pelo valor da variável [id]
+  // ? SQL Injection é usado para segurança
 
   res.json(incidenteEspecifico);
 });
 
-//Rota Novos Registros
+//Rota POST - Novos Registros  /Endpoints
 
 app.post("/incidentes", async (req, res) => {
   const {
@@ -71,7 +72,7 @@ app.post("/incidentes", async (req, res) => {
   const db = await criarBanco();
 
   await db.run(
-    `INSERT INTO incidentes({tipo_problema, localizacao, descricao, prioridade, nome_solicitante, data_registro, hora_registro) VALUES (?, ?, ?, ?, ?, ?, ?)`,
+    `INSERT INTO incidentes(tipo_problema, localizacao, descricao, prioridade, nome_solicitante, data_registro, hora_registro) VALUES (?, ?, ?, ?, ?, ?, ?)`,
     [
       tipo_problema,
       localizacao,
@@ -83,8 +84,8 @@ app.post("/incidentes", async (req, res) => {
     ],
   );
 
-  // Envie uma resposta de confirmação para o cliente que fez a requisição
+  //Envia uma resposta de confirmação para o cliente que fez a requisição
   res.send(
-    `Incidente novo registrado: ${tipo_problema} registrado na data ${data_registro} por ${nome_solicitante}`,
+    `Incidente novo registrado: ${tipo_problema} registrado na data ${data_registro} por ${nome_solicitante} `,
   );
 });
